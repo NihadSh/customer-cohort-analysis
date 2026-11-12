@@ -1,23 +1,4 @@
-"""Customer cohort (retention) analysis for motor TPL policies.
 
-Every (vehicle, owner) pair insured in a given year is put into exactly one
-category by looking at the two previous years:
-
-    New        - not insured in either of the two previous years
-    Retained   - insured last year, not the year before   (1 year with us)
-    Loyal      - insured in both previous years            (2+ years with us)
-    Win-back   - not insured last year, but the year before (came back)
-
-The key is the (plate number, client id) pair, so when a car is sold to a new
-owner it correctly counts as a NEW customer. The four categories add up to the
-total; the script checks this and fails loudly if they don't.
-
-For each year x client type x category it reports vehicles, policies, GWP and
-customers. Duplicated invoice rows are removed first.
-
-Usage:
-    python cohort_analysis.py --years 2023 2024 2025
-"""
 import argparse
 from pathlib import Path
 
